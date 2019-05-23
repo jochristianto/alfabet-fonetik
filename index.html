@@ -1,0 +1,149 @@
+<html>
+<head>
+  <title>Alfabet Fonetik</title>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    input.form-control:focus, input.form-control:active,
+    button.btn:focus,
+    button.btn:active {
+      box-shadow: none;
+      border-color: #ced4da;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="v-jc-af">
+    <template>
+      <div class="py-5 text-center" v-show="!nameFocused &amp;&amp; name.length === 0"><img class="d-block mx-auto mb-4" src="https://maxcdn.icons8.com/wp-content/uploads/2014/03/beta-128.png" style="width: 72px; height: auto;"/>
+        <h2>Alfabet Fonetik</h2>
+        <p class="lead">Sebuah perangkat lunak kecil untuk mengubah nama (atau apapun) menjadi alfabet (dan numeric) fonetik demi kemudahan bertelepon.</p>
+      </div>
+      <div class="row mb-4" :class="{ 'mt-4': nameFocused || name.length &gt;= 1 }">
+        <div class="col-md-12 order-md-1">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label>Nama (atau apapun)</label>
+              <div class="input-group mb-3">
+                <input class="form-control" type="text" placeholder="Tulis di sini" v-model="name" ref="textName" @focus="nameFocused = true" @blur="nameFocused = false"/>
+                <div class="input-group-append" v-if="name.length &gt;= 1">
+                  <button class="btn btn-info" type="button" @click="clear">&times;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 order-md-2 mt-4" v-show="name.length &gt;= 1">
+          <h4 class="d-flex justify-content-between align-items-center mb-3"><span class="text-muted">Alfabet Fonetik</span><span class="badge badge-secondary badge-pill">{{ name.length }}</span></h4>
+          <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="(char, index) in phoneticNames" :key="index">
+              <button class="btn btn-block text-left text-md-center" :class="buttonClass(index)">{{ char }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4 text-center" v-show="name.toLowerCase() === 'cindy'">
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Hey Cindy ❤️, click me.</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">I love you</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </div>
+              <div class="modal-body"><img src="https://i.pinimg.com/originals/78/19/9a/78199a2f756ac7a6469bb4d43f33fb91.jpg" style="max-width: 100%;"/></div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#v-jc-af',
+      data: {
+        name: '',
+        nameFocused: false,
+        phoneticAlphabets: {
+          'A': 'Alfa',
+          'B': 'Bravo',
+          'C': 'Charlie',
+          'D': 'Delta',
+          'E': 'Echo',
+          'F': 'Foxtrot',
+          'G': 'Golf',
+          'H': 'Hotel',
+          'I': 'India',
+          'J': 'Juliet',
+          'K': 'Kilo',
+          'L': 'Lima',
+          'M': 'Mike',
+          'N': 'November',
+          'O': 'Oscar',
+          'P': 'Papa',
+          'Q': 'Quebec',
+          'R': 'Romeo',
+          'S': 'Sierra',
+          'T': 'Tango',
+          'U': 'Uniform',
+          'V': 'Victor',
+          'W': 'Whiskey',
+          'X': 'Xray',
+          'Y': 'Yankee',
+          'Z': 'Zulu',
+          ' ': 'Spasi',
+          '0': 'Kosong',
+          '1': 'Satu',
+          '2': 'Dua',
+          '3': 'Tiga',
+          '4': 'Empat',
+          '5': 'Lima',
+          '6': 'Enam',
+          '7': 'Tujuh',
+          '8': 'Delapan',
+          '9': 'Sembilan',
+          '.': 'Titik',
+          ',': 'Koma',
+          '@': 'At',
+          '-': 'Dash',
+          '_': 'Underscore'
+        }
+      },
+      computed: {
+        phoneticNames() {
+          return this.name.split('').map(x => {
+            if (typeof this.phoneticAlphabets[x.toUpperCase()] !== 'undefined') {
+              return this.phoneticAlphabets[x.toUpperCase()];
+            }
+        
+            return x;
+          });
+        },
+      },
+      methods: {
+        buttonClass(index) {
+          const variants = 5;
+          return { 
+            'btn-primary': index % variants === 0, 
+            'btn-success': index % variants === 1,
+            'btn-warning': index % variants === 2,
+            'btn-secondary': index % variants === 3,
+            'btn-danger': index % variants === 4,
+          };
+        },
+        clear() {
+          this.name = '';
+          this.$refs.textName.focus();
+        },
+      }
+    });
+  </script>
+</body>
+</html>

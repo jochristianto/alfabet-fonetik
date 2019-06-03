@@ -1,0 +1,16 @@
+{
+  "name": "Alfabet Fonetik",
+  "short_name": "Alfabet Fonetik",
+  "description": "Sebuah perangkat lunak kecil untuk mengubah nama (atau apapun) menjadi alfabet (dan numeric) fonetik demi kemudahan bertelepon.",
+  "icons": [{
+    "src": "logo-128.png",
+    "sizes": "128",
+    "type": "image/png"
+  }],
+  "start_url": "/?utm_source=manifest&utm_medium=pwa",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0c5094",
+  "lang": "en",
+  "orientation": "portrait"
+}

@@ -1,9 +1,23 @@
 <html>
+
 <head>
   <title>Alfabet Fonetik</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json">
+  <meta data-hid="description" name="description" content="Sebuah perangkat lunak kecil untuk mengubah nama (atau apapun) menjadi alfabet (dan numeric) fonetik demi kemudahan bertelepon.">
+  <meta data-hid="mobile-web-app-capable" name="mobile-web-app-capable" content="yes">
+  <meta data-hid="apple-mobile-web-app-title" name="apple-mobile-web-app-title" content="Alfabet Fonetik">
+  <meta data-hid="author" name="author" content="jochristianto">
+  <meta data-hid="theme-color" name="theme-color" content="#0c5094">
+  <meta data-hid="og:type" name="og:type" property="og:type" content="website">
+  <meta data-hid="og:title" name="og:title" property="og:title" content="Alfabet Fonetik">
+  <meta data-hid="og:site_name" name="og:site_name" property="og:site_name" content="Alfabet Fonetik">
+  <meta data-hid="og:description" name="og:description" property="og:description" content="Sebuah perangkat lunak kecil untuk mengubah nama (atau apapun) menjadi alfabet (dan numeric) fonetik demi kemudahan bertelepon.">
+  <link rel="shortcut icon" href="logo-128.png">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
-    input.form-control:focus, input.form-control:active,
+    input.form-control:focus,
+    input.form-control:active,
     button.btn:focus,
     button.btn:active {
       box-shadow: none;
@@ -12,12 +26,15 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container" id="v-jc-af">
     <template>
-      <div class="py-5 text-center" v-show="!nameFocused &amp;&amp; name.length === 0"><img class="d-block mx-auto mb-4" src="https://maxcdn.icons8.com/wp-content/uploads/2014/03/beta-128.png" style="width: 72px; height: auto;"/>
+      <div class="py-5 text-center" v-show="!nameFocused &amp;&amp; name.length === 0"><img class="d-block mx-auto mb-4"
+          src="logo-128.png" style="width: 72px; height: auto;" />
         <h2>Alfabet Fonetik</h2>
-        <p class="lead">Sebuah perangkat lunak kecil untuk mengubah nama (atau apapun) menjadi alfabet (dan numeric) fonetik demi kemudahan bertelepon.</p>
+        <p class="lead">Sebuah perangkat lunak kecil untuk mengubah nama (atau apapun) menjadi alfabet (dan numeric)
+          fonetik demi kemudahan bertelepon.</p>
       </div>
       <div class="row mb-4" :class="{ 'mt-4': nameFocused || name.length &gt;= 1 }">
         <div class="col-md-12 order-md-1">
@@ -25,7 +42,8 @@
             <div class="col-md-12 mb-3">
               <label>Nama (atau apapun)</label>
               <div class="input-group mb-3">
-                <input class="form-control" type="text" placeholder="Tulis di sini" v-model="name" ref="textName" @focus="nameFocused = true" @blur="nameFocused = false"/>
+                <input class="form-control" type="text" placeholder="Tulis di sini" v-model="name" ref="textName"
+                  @focus="nameFocused = true" @blur="nameFocused = false" />
                 <div class="input-group-append" v-if="name.length &gt;= 1">
                   <button class="btn btn-info" type="button" @click="clear">&times;</button>
                 </div>
@@ -34,27 +52,12 @@
           </div>
         </div>
         <div class="col-md-12 order-md-2 mt-4" v-show="name.length &gt;= 1">
-          <h4 class="d-flex justify-content-between align-items-center mb-3"><span class="text-muted">Alfabet Fonetik</span><span class="badge badge-secondary badge-pill">{{ name.length }}</span></h4>
+          <h4 class="d-flex justify-content-between align-items-center mb-3"><span class="text-muted">Alfabet
+              Fonetik</span><span class="badge badge-secondary badge-pill">{{ name.length }}</span></h4>
           <div class="row">
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="(char, index) in phoneticNames" :key="index">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="(char, index) in phoneticNames"
+              :key="index">
               <button class="btn btn-block text-left text-md-center" :class="buttonClass(index)">{{ char }}</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mb-4 text-center" v-show="name.toLowerCase() === 'cindy'">
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Hey Cindy ❤️, click me.</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">I love you</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              </div>
-              <div class="modal-body"><img src="https://i.pinimg.com/originals/78/19/9a/78199a2f756ac7a6469bb4d43f33fb91.jpg" style="max-width: 100%;"/></div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-              </div>
             </div>
           </div>
         </div>
@@ -122,7 +125,7 @@
             if (typeof this.phoneticAlphabets[x.toUpperCase()] !== 'undefined') {
               return this.phoneticAlphabets[x.toUpperCase()];
             }
-        
+
             return x;
           });
         },
@@ -130,8 +133,8 @@
       methods: {
         buttonClass(index) {
           const variants = 5;
-          return { 
-            'btn-primary': index % variants === 0, 
+          return {
+            'btn-primary': index % variants === 0,
             'btn-success': index % variants === 1,
             'btn-warning': index % variants === 2,
             'btn-secondary': index % variants === 3,
@@ -146,4 +149,5 @@
     });
   </script>
 </body>
+
 </html>
